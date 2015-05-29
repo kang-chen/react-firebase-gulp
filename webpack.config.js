@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require("webpack");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
@@ -10,8 +11,8 @@ module.exports = {
     vendor: ["jquery", "backbone", "underscore", "react", "pusher"]
   },
   output: {
-    path: __dirname + "/build/js",
     path: __dirname + "/public/js",
+    publicPath: "/js",
     filename: "[name].js",
     chunkFilename: "[chunkhash].js"
   },
@@ -30,7 +31,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ["", ".js", ".styl", ".html"]
+    extensions: ["", ".js", ".scss", ".html"]
   },
   plugins: [new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.scripts.js", Infinity)]
 };
