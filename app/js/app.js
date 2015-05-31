@@ -1,26 +1,33 @@
-console.log("loading scripts")
 
-var Firebase = require("firebase");
-var backend = new Firebase("https://arrowpen.firebaseio.com/");
+console.log("check if the be is even compilling hello");
 
-// backend.set({
-//   title: "exiting!",
+// var Firebase = require("firebase");
+var Backbone = require("backbone");
+// var React = require("react");
+// var _ = require("underscore");
+var $ = require("jquery");
+$("body").html("hello");
+
+// var signup = require("./signup");
+
+
+// var be = new Firebase("https://arrowpen.firebaseio.com/");
+//
+// be.set({
 //   author: "Kang",
 //   location: {
 //     city: "Sydney"
 //   }
 // });
 //
-//
-// backend.child("location/city").on("value", function(snapshot) {
+// be.child("location/city").on("value", function(snapshot) {
 //   alert(snapshot.val());
 // });
 
-backend.set({
-  users: null
-});
 
 
-backend.child("location/city").on("value", function(snapshot) {
-  alert(snapshot.val());
-});
+// signup.createUser("wangchen@gmail.com", "khcd43");
+
+// be.set({
+//   users: null
+// });

@@ -1,20 +1,73 @@
 var gulp = require("gulp");
+var path = require("path");
 var gutil = require("gulp-util");
+var watch = require("gulp-watch");
+var sass = require("gulp-sass");
+// var rename = require("gulp-rename");
+var minifycss = require("gulp-minify-css");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
 
-// The development server (the recommended option for development)
-gulp.task("default", ["webpack-dev-server"]);
 
-// Build and watch cycle (another option for development)
-// Advantage: No server required, can run app from filesystem
-// Disadvantage: Requests are not blocked until bundle is available,
-//               can serve an old app on refresh
-
-gulp.task("build-dev", ["webpack:build-dev"], function() {
-	gulp.watch(["app/**/*"], ["webpack:build-dev"]);
+gulp.task('sass', function(){
+	return gulp.src('app/sass/*.scss')
+		.pipe(sass({ style: 'expanded' }))
+		.pipe(gulp.dest('build/css'))
+		.pipe(minifycss())
+		.pipe(gulp.dest('css'));
 });
+
+
+gulp.task('html', function() {
+  gulp.src("app/*.html")
+    .pipe(gulp.dest('build'));
+});
+
+gulp.task("default", ["webpack-dev-server", "build", "watch"]);
+
+gulp.task("build", function(callback) {
+	gulp.run["webpack:build-dev", "html", "sass"];
+  return callback();
+});
+
+
+gulp.task('watch', function() {
+
+  //Add watching on sass-files
+  gulp.watch('app/sass/*.scss', ["sass"]);
+
+  //Add watching on html-files
+  gulp.watch('app/*.html', function () {
+    gulp.run('html');
+  });
+
+  // gulp.watch('app/js/*.js', function () {
+  //   gulp.run("webpack:build-dev")
+  // });
+  var src = './app';
+  var dest = './build';
+
+  gulp.watch(path.join(src, '**/*.js')).on('change', function(event) {
+    if (event.type === 'changed') {
+      gulp.src(event.path, { base: path.resolve(src) })
+        .pipe(webpack.closest(CONFIG_FILENAME))
+        .pipe(webpack.init(webpackConfig))
+        .pipe(webpack.props(webpackOptions))
+        .pipe(webpack.watch(function(err, stats) {
+          gulp.src(this.path, { base: this.base })
+              .pipe(webpack.proxy(err, stats))
+              .pipe(webpack.format({
+                  verbose: true,
+                  version: false
+              }))
+              .pipe(gulp.dest(dest));
+          }));
+    }
+  });
+
+});
+
 
 // Production build
 gulp.task("build", ["webpack:build"]);
@@ -61,7 +114,6 @@ gulp.task("webpack:build-dev", function(callback) {
 		callback();
 	});
 });
-
 gulp.task("webpack-dev-server", function(callback) {
 	// modify some webpack config options
 	var myConfig = Object.create(webpackConfig);
@@ -70,7 +122,9 @@ gulp.task("webpack-dev-server", function(callback) {
 
 	// Start a webpack-dev-server
 	new WebpackDevServer(webpack(myConfig), {
-		publicPath: "/" + myConfig.output.publicPath,
+    contentBase: "/Volumes/SSD\ Data/Work/github/arrowpen/build",
+    hot: true,
+		publicPath: myConfig.output.publicPath,
 		stats: {
 			colors: true
 		}
