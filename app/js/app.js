@@ -1,12 +1,8 @@
-
-console.log("check if the be is even compilling hello");
-
 var Firebase = require("firebase");
 var Backbone = require("backbone");
 var React = require("react");
 var Router = require("react-router");
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
-
 import login from  "./login.js";
 import signup from "./signup.js";
 
@@ -27,13 +23,11 @@ import signup from "./signup.js";
 // });
 
 
-
 // signup.createUser("wangchen@gmail.com", "khcd43");
 
 // be.set({
 //   users: null
 // });
-
 
 var App = React.createClass({
   render() {

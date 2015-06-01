@@ -9,7 +9,8 @@
 // module.exports = signup;
 
 import React from 'react';
-import c from "./const";
+// import c from "./const";
+import service from "./service";
 // import ReactFire from 'reactfire';
 
 var Signup = React.createClass({
@@ -23,21 +24,26 @@ var Signup = React.createClass({
     }
   },
   componentWillMount: function() {
-    this.firebaseRef = new Firebase(c.FIREBASE_ACCOUNT)
+    // this.firebaseRef = new Firebase(c.FIREBASE_ACCOUNT)
   },
   handleCreateUser() {
-
-    this.firebaseRef.createUser({
-      email    : this.state.email,
-      password : this.state.password
-    }, function(error, userData) {
-      if (error) {
-        console.log("Error creating user:", error);
-      } else {
-        console.log("Successfully created user account with uid:", userData.uid);
-        this.setState({signedup: true});
+    // this.firebaseRef.createUser({
+    //   email    : this.state.email,
+    //   password : this.state.password
+    // }, function(error, userData) {
+    //   if (error) {
+    //     console.log("Error creating user:", error);
+    //   } else {
+    //     console.log("Successfully created user account with uid:", userData.uid);
+    //     this.setState({signedup: true});
+    //   }
+    // })
+    service.createUser(this.state.email, this.state.password,
+      function() {
+        console.log("created success");
       }
-    })
+    );
+
 
   },
   handleEmailChange: function(event) {
@@ -47,7 +53,7 @@ var Signup = React.createClass({
     this.setState({password: event.target.value});
   },
   render() {
-    if (signedup == false) {
+    if (this.state.signedup == false) {
       return(
         <div className="signup">
           <h3>Signup</h3>
