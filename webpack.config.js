@@ -3,13 +3,12 @@
 
 var path = require('path');
 var webpack = require("webpack");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 // var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   entry: {
     client: "./app/js/app",
-    vendor: ["jquery", "backbone", "underscore", "react", "firebase"]
+    vendor: ["jquery", "backbone", "underscore", "react", "firebase", "reactfire" ]
   },
   output: {
     path: __dirname + "/build/js",
@@ -18,11 +17,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      }
+      { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
     ]
   },
   resolve: {
