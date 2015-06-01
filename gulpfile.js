@@ -12,10 +12,8 @@ var webpackConfig = require("./webpack.config.js");
 
 gulp.task('sass', function(){
 	return gulp.src('app/sass/*.scss')
-		.pipe(sass({ style: 'expanded' }))
-		.pipe(gulp.dest('build/css'))
 		.pipe(minifycss())
-		.pipe(gulp.dest('css'));
+		.pipe(gulp.dest('build/css'));
 });
 
 

@@ -1,33 +1,10 @@
-var Firebase = require("firebase");
-var Backbone = require("backbone");
-var React = require("react");
-var Router = require("react-router");
+import Firebase from "firebase";
+import Backbone from "backbone";
+import React from  "react";
+import Router from "react-router";
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 import login from  "./login.js";
 import signup from "./signup.js";
-
-
-// var _ = require("underscore");
-
-// var be = new Firebase("https://arrowpen.firebaseio.com/");
-//
-// be.set({
-//   author: "Kang",
-//   location: {
-//     city: "Sydney"
-//   }
-// });
-//
-// be.child("location/city").on("value", function(snapshot) {
-//   alert(snapshot.val());
-// });
-
-
-// signup.createUser("wangchen@gmail.com", "khcd43");
-
-// be.set({
-//   users: null
-// });
 
 var App = React.createClass({
   render() {

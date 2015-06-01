@@ -1,20 +1,7 @@
-
-// Plain JS constructor
-
-// var signup = {
-//   createUser: function(email, password) {
-//
-//   }
-// }
-// module.exports = signup;
-
 import React from 'react';
-// import c from "./const";
 import service from "./service";
-// import ReactFire from 'reactfire';
 
 var Signup = React.createClass({
-  // mixins: [ ReactFire ]
 
   getInitialState: function() {
     return {
@@ -27,24 +14,11 @@ var Signup = React.createClass({
     // this.firebaseRef = new Firebase(c.FIREBASE_ACCOUNT)
   },
   handleCreateUser() {
-    // this.firebaseRef.createUser({
-    //   email    : this.state.email,
-    //   password : this.state.password
-    // }, function(error, userData) {
-    //   if (error) {
-    //     console.log("Error creating user:", error);
-    //   } else {
-    //     console.log("Successfully created user account with uid:", userData.uid);
-    //     this.setState({signedup: true});
-    //   }
-    // })
     service.createUser(this.state.email, this.state.password,
       function() {
         console.log("created success");
       }
     );
-
-
   },
   handleEmailChange: function(event) {
     this.setState({email: event.target.value});
@@ -69,7 +43,7 @@ var Signup = React.createClass({
       return(
         <div className="signup complete">
           <h3>Signup</h3>
-          <p>Thanks or signing up, we'll be sending you an email shortly.</p>
+          <p>Thanks or signing up, we''ll be sending you an email shortly.</p>
         </div>
       );
     }
