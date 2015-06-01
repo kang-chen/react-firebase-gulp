@@ -1,10 +1,9 @@
 # React firebase gulp template
 
-Simple routing with react-router  
-Basic auth implementation with Firebase  
-Build and watch tooling with Gulp and Webpack  
-
-Find and replace all instances of <FIREBASE_NAME> with your firebase account name
+* Simple routing with react-router  
+* Basic auth implementation with Firebase  
+* Build and watch tooling with Gulp and Webpack  
+* Find and replace all instances of <FIREBASE_NAME> with your firebase account name
 
 ## Build
 
