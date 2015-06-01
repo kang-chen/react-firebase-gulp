@@ -31,7 +31,6 @@ gulp.task("build", function(callback) {
   return callback();
 });
 
-
 gulp.task('watch', function() {
 
   //Add watching on sass-files
@@ -48,10 +47,10 @@ gulp.task('watch', function() {
   var src = './app';
   var dest = './build';
 
-  gulp.watch(path.join(src, '**/*.js')).on('change', function(event) {
+  gulp.watch(path.join(src, 'app/js/*.js')).on('change', function(event) {
     if (event.type === 'changed') {
       gulp.src(event.path, { base: path.resolve(src) })
-        .pipe(webpack.closest(CONFIG_FILENAME))
+        .pipe(webpack.closest("webpack.config.js"))
         .pipe(webpack.init(webpackConfig))
         .pipe(webpack.props(webpackOptions))
         .pipe(webpack.watch(function(err, stats) {
@@ -67,7 +66,6 @@ gulp.task('watch', function() {
   });
 
 });
-
 
 // Production build
 gulp.task("build", ["webpack:build"]);
@@ -122,7 +120,7 @@ gulp.task("webpack-dev-server", function(callback) {
 
 	// Start a webpack-dev-server
 	new WebpackDevServer(webpack(myConfig), {
-    contentBase: "/Volumes/SSD\ Data/Work/github/arrowpen/build",
+    contentBase: __dirname + "/build",
     hot: true,
 		publicPath: myConfig.output.publicPath,
 		stats: {

@@ -9,8 +9,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     client: "./app/js/app",
-    // vendor: ["jquery", "backbone", "underscore", "react", "firebase"]
-    vendor: ["jquery", "backbone"]
+    vendor: ["jquery", "backbone", "underscore", "react", "firebase"]
   },
   output: {
     path: __dirname + "/build/js",
@@ -18,7 +17,6 @@ module.exports = {
     filename: "[name].js"
   },
   module: {
-    noParse: [/jquery/, /backbone/, /underscore/, /react/, /firebase/],
     loaders: [
       {
         test: /\.js$/,
@@ -32,7 +30,7 @@ module.exports = {
   }
   ,
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.scripts.js", Infinity)
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.scripts.js")
   ]
 };
 
