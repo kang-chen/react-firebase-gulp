@@ -8,7 +8,7 @@ var webpack = require("webpack");
 module.exports = {
   entry: {
     client: "./app/js/app",
-    vendor: ["jquery", "backbone", "underscore", "react", "firebase", "reactfire" ]
+    vendor: ["jquery", "underscore", "react", "firebase", "reactfire" ]
   },
   output: {
     path: __dirname + "/build/js",

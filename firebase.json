@@ -1,5 +1,5 @@
 {
-  "firebase": "arrowpen",
+  "firebase": "<FIREBASE_NAME>",
   "public": "build",
   "ignore": [
     "firebase.json",
